@@ -1,0 +1,24 @@
+{
+  "la_mente_observadora": {
+    "id": "la_mente_observadora",
+    "name": "La Mente Observadora",
+    "handle": "@LaMenteObservadora",
+    "niche": "Psicología Oscura, Leyes del Poder y Estoicismo Moderno",
+    "archetype": "El Sabio Distante / El Observador Imperturbable",
+    "thesis": "La verdadera fuerza no consiste en gritar o discutir, sino en observar sin reaccionar, sostener límites inquebrantables y dominar las leyes no escritas de la conducta humana.",
+    "colors": {
+      "primary": "#0B0C10",
+      "gold": "#E5C158",
+      "cyan": "#66FCF1",
+      "white": "#EAEAEA"
+    },
+    "voice": {
+      "name": "es-US-AlonsoNeural",
+      "rate": "-7%",
+      "pitch": "-4Hz",
+      "description": "Barítono profundo, solemne, ritmo pausado con pausas reflexivas"
+    },
+    "flow_rules": "ancient Roman stoic stone bust @LaMente, chiaroscuro film noir lighting, volumetric mist, vertical rain streaks, antique gold and cyan rim lights, slow continuous push-in zoom, zero camera shake",
+    "created_at": "2026-10-24"
+  }
+}

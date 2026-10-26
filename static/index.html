@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+
+<html lang="es" class="dark">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VIDSTUDIO PRO — SaaS Faceless Video & Outlier Suite</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+
+    tailwind.config = {
+
+      darkMode: 'class',
+
+      theme: {
+
+        extend: {
+
+          fontFamily: {
+
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+
+            serif: ['Cinzel', 'serif'],
+
+            mono: ['"JetBrains Mono"', 'monospace']
+
+          },
+
+          colors: {
+
+            brand: {
+
+              gold: '#E5C158',
+
+              cyan: '#66FCF1',
+
+              dark: '#0B0C10',
+
+              card: '#12141A',
+
+              border: 'rgba(255, 255, 255, 0.08)'
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  </script>
+
+  <style>
+
+    body {
+
+      background-color: #08090C;
+
+      color: #E2E8F0;
+
+      font-family: 'Plus Jakarta Sans', sans-serif;
+
+    }
+
+    .glass-panel {
+
+      background: rgba(18, 20, 26, 0.75);
+
+      backdrop-filter: blur(16px);
+
+      border: 1px solid rgba(255, 255, 255, 0.07);
+
+    }
+
+    .glass-card {
+
+      background: linear-gradient(135deg, rgba(22, 25, 34, 0.8) 0%, rgba(14, 16, 22, 0.8) 100%);
+
+      backdrop-filter: blur(12px);
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+    }
+
+    .glass-card:hover {
+
+      border-color: rgba(229, 193, 88, 0.25);
+
+    }
+
+    .gold-gradient-text {
+
+      background: linear-gradient(135deg, #FFF0B3 0%, #E5C158 50%, #B38E28 100%);
+
+      -webkit-background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+    .nav-item-active {
+
+      background: linear-gradient(90deg, rgba(229, 193, 88, 0.15) 0%, rgba(229, 193, 88, 0.03) 100%);
+
+      border-left: 3px solid #E5C158;
+
+      color: #FFF0B3;
+
+      font-weight: 700;
+
+    }
+
+    /* Custom scrollbar */
+
+    ::-webkit-scrollbar {
+
+      width: 6px;
+
+      height: 6px;
+
+    }
+
+    ::-webkit-scrollbar-track {
+
+      background: #0B0C10;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+      background: #232733;
+
+      border-radius: 4px;
+
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+
+      background: #3B4255;
+
+    }
+
+  </style>
+
+</head>
+
+<body class="h-screen overflow-hidden flex flex-col antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+
+
+  <!-- APP SHELL CONTAINER -->
+
+  <div class="flex flex-1 h-screen overflow-hidden">
+
+
+
+    <!-- ========================================================================= -->
+
+    <!-- COLLAPSIBLE SIDEBAR MENU -->
+
+    <!-- ========================================================================= -->
+
+    <aside id="mainSidebar" class="w-64 bg-[#0D0F15] border-r border-white/5 flex flex-col justify-between transition-all duration-300 z-50 shrink-0">
+
+      
+
+      <!-- Top Branding -->
+
+      <div class="p-4 border-b border-white/5 flex items-center justify-between">
+
+        <div class="flex items-center gap-3 overflow-hidden">
+
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-600/10 border border-amber-500/30 flex items-center justify-center shrink-0">
+
+            <i class="ph-bold ph-video-camera text-amber-400 text-lg"></i>
+
+          </div>
+
+          <div class="sidebar-text truncate">
+
+            <h1 class="font-bold text-sm text-white tracking-wider flex items-center gap-1.5 font-serif">
+
+              VIDSTUDIO <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 font-sans">PRO</span>
+
+            </h1>
+
+            <p class="text-[10px] text-gray-500 tracking-tight">Viral Automation Engine</p>
+
+          </div>
+
+        </div>
+
+        <button onclick="toggleSidebar()" class="p-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors" title="Colapsar Menú">
+
+          <i class="ph-bold ph-sidebar-simple text-base"></i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- Navigation Links -->
+
+      <nav class="flex-1 overflow-y-auto p-3 space-y-6">
+
+        
+
+        <!-- Group: Descubrimiento -->
+
+        <div class="space-y-1">
+
+          <div class="sidebar-text px-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+
+            Descubrimiento Viral
+
+          </div>
+
+          <button id="navRadar" onclick="switchMode('radar')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-radar text-base text-rose-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">1. Radar Outliers 24/7</span>
+
+          </button>
+
+          <button id="navDeconstruct" onclick="switchMode('deconstruct')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-dna text-base text-amber-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">2. Deconstrucción 1 a 1</span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- Group: Creación & Producción -->
+
+        <div class="space-y-1">
+
+          <div class="sidebar-text px-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+
+            Estudio de Creación
+
+          </div>
+
+          <button id="navStudio" onclick="switchMode('studio')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-pencil-line text-base text-amber-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">3. Taller de Guiones & AVD</span>
+
+          </button>
+
+          <button id="navCtrLab" onclick="switchMode('ctrlab')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-image-square text-base text-cyan-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">4. CTR Lab: Miniaturas A/B</span>
+
+          </button>
+
+          <button id="navBrainstorm" onclick="switchMode('brainstorm')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-chats-circle text-base text-purple-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">5. Copiloto Creativo</span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- Group: Distribución & Embudo -->
+
+        <div class="space-y-1">
+
+          <div class="sidebar-text px-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+
+            Distribución & Embudo
+
+          </div>
+
+          <button id="navRepurpose" onclick="switchMode('repurpose')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center justify-between text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <div class="flex items-center gap-3 truncate">
+
+              <i class="ph-bold ph-scissors text-base text-cyan-400 shrink-0"></i>
+
+              <span class="sidebar-text truncate">6. Clipper 9:16 Real</span>
+
+            </div>
+
+            <span class="sidebar-text text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-mono border border-cyan-500/20 shrink-0">
+
+              MP4
+
+            </span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- Group: Red de Canales -->
+
+        <div class="space-y-1">
+
+          <div class="sidebar-text px-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+
+            Holding & Marcas
+
+          </div>
+
+          <button id="navFunnel" onclick="switchMode('funnel')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center justify-between text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <div class="flex items-center gap-3 truncate">
+
+              <i class="ph-bold ph-kanban text-base text-emerald-400 shrink-0"></i>
+
+              <span class="sidebar-text truncate">7. Tablero de Embudo</span>
+
+            </div>
+
+            <span class="sidebar-text text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono border border-emerald-500/20 shrink-0">
+
+              BOARD
+
+            </span>
+
+          </button>
+
+          <button id="navResearch" onclick="switchMode('research')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+
+            <i class="ph-bold ph-compass text-base text-cyan-400 shrink-0"></i>
+
+            <span class="sidebar-text truncate">8. Incubadora de Canales</span>
+
+          </button>
+          <button id="navVfx" onclick="switchMode('vfx')" class="w-full px-3 py-2.5 rounded-xl text-xs flex items-center gap-3 text-gray-400 hover:bg-white/5 hover:text-white transition-all text-left">
+            <i class="ph-bold ph-magic-wand text-base text-fuchsia-400 shrink-0"></i>
+            <span class="sidebar-text truncate">9. AI Magic VFX (Por Palabras)</span>
+          </button>
+
+        </div>
+
+
+
+      </nav>
+
+
+
+      <!-- Bottom Profile Card -->
+
+      <div class="p-3 border-t border-white/5 bg-black/40">
+
+        <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
+
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center font-bold text-xs text-black shrink-0" id="sidebarAvatar">
+
+            M
+
+          </div>
+
+          <div class="sidebar-text truncate min-w-0">
+
+            <div class="text-xs font-bold text-white truncate" id="sidebarBrandName">La Mente Observadora</div>
+
+            <div class="text-[10px] text-emerald-400 flex items-center gap-1">
+
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+
+              FFmpeg & Groq Online
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </aside>
+
+
+
+    <!-- ========================================================================= -->
+
+    <!-- MAIN WORKSPACE & TOP HEADER -->
+
+    <!-- ========================================================================= -->
+
+    <div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+
+      
+
+      <!-- Top Header -->
+
+      <header class="h-16 border-b border-white/5 bg-[#0b0c10]/90 backdrop-blur-md px-6 flex items-center justify-between shrink-0 z-40">
+
+        
+
+        <!-- Breadcrumbs -->
+
+        <div class="flex items-center gap-3">
+
+          <button onclick="toggleSidebar()" class="md:hidden p-2 rounded-xl bg-white/5 text-gray-400">
+
+            <i class="ph-bold ph-list text-lg"></i>
+
+          </button>
+
+          <div class="flex items-center gap-2 text-xs font-medium">
+
+            <span class="text-gray-500">VidStudio</span>
+
+            <span class="text-gray-600">/</span>
+
+            <span class="text-amber-300 font-bold" id="currentSectionTitle">1. Radar de Outliers 24/7</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Global Channel Selector & Language Toggle -->
+
+        <div class="flex items-center gap-3">
+
+          
+
+          <!-- Language Toggle -->
+
+          <div class="flex items-center bg-black/50 p-1 rounded-xl border border-white/10 text-xs">
+
+            <button id="btnLangEs" onclick="setLanguage('es')" class="px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 transition-all">
+
+              <span>ESPAÑOL</span>
+
+            </button>
+
+            <button id="btnLangEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg font-semibold text-gray-400 hover:text-white flex items-center gap-1 transition-all">
+
+              <span>ENGLISH</span>
+
+            </button>
+
+          </div>
+
+
+
+          <!-- Channel Dropdown -->
+
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/50 border border-amber-500/30 text-xs">
+
+            <i class="ph-fill ph-check-circle text-amber-400"></i>
+
+            <span class="text-gray-400 hidden sm:inline">Canal:</span>
+
+            <select id="channelSelector" onchange="onChannelChange()" class="bg-transparent text-amber-300 font-bold focus:outline-none cursor-pointer">
+
+              <option value="la_mente_observadora" class="bg-black text-white">La Mente Observadora</option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- Global 1-Click ZIP Download Button -->
+
+          <button onclick="exportProductionZip()" id="btnGlobalExportZip" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-black font-extrabold text-xs shadow-md shadow-emerald-500/20 flex items-center gap-1.5 transition-all">
+
+            <i class="ph-bold ph-package text-sm"></i>
+
+            <span class="hidden md:inline">Exportar ZIP</span>
+
+          </button>
+
+
+
+        </div>
+
+
+
+      </header>
+
+
+
+      <!-- SCROLLABLE WORKSPACE (CLEAN & ISOLATED VIEWS) -->
+
+      <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 1: RADAR DE OUTLIERS 24/7 -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionRadar" class="space-y-8">
+
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-rose-500/20">
+
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-3xl space-y-2">
+
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-400">
+
+                <i class="ph-bold ph-radar"></i> Radar Autónomo de Outliers 24/7 (Algoritmo VPH)
+
+              </div>
+
+              <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+
+                Scouting de Nichos & Outliers: <span class="text-rose-400">Descubre anomalías virales en 1-clic</span>
+
+              </h2>
+
+              <p class="text-xs md:text-sm text-gray-400">
+
+                Selecciona un nicho caliente instantáneo o escribe cualquier tema (ej: <i>psicología oscura</i>, <i>hábitos estoicos</i>) o canal de YouTube. El algoritmo descubrirá las mejores anomalías virales (&gt;2.0x) listas para clonar.
+
+              </p>
+
+            </div>
+
+
+
+            <!-- HOT NICHE PRESETS (1-CLICK DISCOVERY) -->
+
+            <div class="mt-5 space-y-2">
+
+              <span class="text-xs font-bold text-amber-400/90 flex items-center gap-1.5 uppercase tracking-wider">
+
+                <i class="ph-bold ph-fire"></i> Nichos Calientes Sugeridos (Haz clic para explorar):
+
+              </span>
+
+              <div class="flex flex-wrap gap-2">
+
+                <button type="button" onclick="selectNichePreset('psicologia_oscura', 'psicologia oscura manipulacion lenguaje corporal')" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 border border-white/10 hover:border-rose-500/50 text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center gap-1.5">
+
+                  <span>🧠</span> Psicología Oscura & Manipulación
+
+                </button>
+
+                <button type="button" onclick="selectNichePreset('estoicismo', 'estoicismo marco aurelio fortaleza mental disciplina')" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 border border-white/10 hover:border-amber-500/50 text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center gap-1.5">
+
+                  <span>🏛️</span> Estoicismo & Fortaleza Mental
+
+                </button>
+
+                <button type="button" onclick="selectNichePreset('leyes_poder', '48 leyes del poder maquiavelo psicologia seduccion')" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-purple-500/20 border border-white/10 hover:border-purple-500/50 text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center gap-1.5">
+
+                  <span>👑</span> 48 Leyes del Poder & Maquiavelo
+
+                </button>
+
+                <button type="button" onclick="selectNichePreset('casos_misterio', 'misterio psicologia criminal casos reales perturbadores')" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/50 text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center gap-1.5">
+
+                  <span>🕵️</span> Misterio & Crímenes Psicológicos
+
+                </button>
+
+                <button type="button" onclick="selectNichePreset('dinero_habitos', 'psicologia del dinero habitos riqueza mentalidad')" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/50 text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center gap-1.5">
+
+                  <span>💰</span> Psicología del Dinero & Hábitos
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="mt-5 flex flex-col md:flex-row gap-3">
+
+              <div class="relative flex-1">
+
+                <i class="ph-bold ph-magnifying-glass text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg"></i>
+
+                <input 
+
+                  type="text" 
+
+                  id="radarChannelInput"
+
+                  placeholder="Escribe un tema o nicho (ej: psicología oscura) o un canal (@CaminoImplacable)..." 
+
+                  value="psicologia oscura manipulacion lenguaje corporal"
+
+                  class="w-full pl-12 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-rose-400 transition-all"
+
+                />
+
+              </div>
+
+              <button 
+
+                id="btnScanRadar"
+
+                onclick="scanRadarChannel()"
+
+                class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-600 hover:from-rose-400 hover:to-amber-500 text-black font-extrabold text-sm shadow-lg shadow-rose-500/20 flex items-center justify-center gap-2 transition-all transform active:scale-95 whitespace-nowrap"
+
+              >
+
+                <i class="ph-bold ph-radar text-lg"></i>
+
+                <span>Explorar Nicho & Anomalías</span>
+
+              </button>
+
+            </div>
+
+
+
+          <!-- Competitor Channels Grid -->
+
+          <div class="space-y-4">
+
+            <div class="flex items-center justify-between">
+
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+
+                <i class="ph-bold ph-broadcast text-rose-400"></i> Canales en Monitoreo Activo
+
+              </h3>
+
+              <span class="text-xs text-gray-400" id="radarChannelsCount">1 canal monitoreado</span>
+
+            </div>
+
+            <div id="radarChannelsList" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+
+          </div>
+
+
+
+          <!-- Outliers Detected Feed -->
+
+          <div class="space-y-4">
+
+            <div class="flex items-center justify-between">
+
+              <div class="flex items-center gap-2">
+
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+
+                  Feed de Anomalías Virales Identificadas (Outliers)
+
+                </h3>
+
+              </div>
+
+              <span class="text-xs text-rose-300 font-mono">Ordenado por multiplicador de velocidad</span>
+
+            </div>
+
+            <div id="radarOutliersFeed" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 2: DECONSTRUCCIÓN 1 A 1 & ADN ACÚSTICO (WHISPER + KEYFRAMES) -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionDeconstruct" class="space-y-8 hidden">
+
+          
+
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-amber-500/20">
+
+            <div class="max-w-3xl space-y-2">
+
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+
+                <i class="ph-bold ph-dna"></i> Deconstrucción Acústica Multilingüe & Transcripción Whisper
+
+              </div>
+
+              <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+
+                Analizador de Réplica: <span class="gold-gradient-text">Deconstruye y clona cualquier video viral</span>
+
+              </h2>
+
+              <p class="text-xs md:text-sm text-gray-400">
+
+                Descarga y transcribe el audio real del video en cualquier idioma, desglosa su ritmo de cortes, estilo visual y diseña una réplica exacta.
+
+              </p>
+
+            </div>
+
+
+
+            <div class="mt-6 flex flex-col md:flex-row gap-3">
+
+              <div class="relative flex-1">
+
+                <i class="ph-bold ph-link text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg"></i>
+
+                <input 
+
+                  type="text" 
+
+                  id="urlInput"
+
+                  placeholder="Pega cualquier URL de YouTube (ej: https://www.youtube.com/watch?v=5xBON9PTLEw)..." 
+
+                  value="https://www.youtube.com/watch?v=5xBON9PTLEw"
+
+                  class="w-full pl-12 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-all"
+
+                />
+
+              </div>
+
+
+
+              <!-- Input de Vistas Reales del Video -->
+
+              <div class="relative w-full md:w-56">
+
+                <i class="ph-bold ph-eye text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg"></i>
+
+                <input 
+
+                  type="number" 
+
+                  id="customViewsInput"
+
+                  placeholder="Vistas reales..." 
+
+                  value="138000"
+
+                  class="w-full pl-12 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-sm text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition-all font-mono"
+
+                  title="Ingresa las vistas reales del video para calcular las ganancias exactas"
+
+                />
+
+              </div>
+
+
+
+              <button 
+
+                id="btnAnalyze"
+
+                onclick="analyzeVideo()"
+
+                class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-sm shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all transform active:scale-95 whitespace-nowrap"
+
+              >
+
+                <i class="ph-bold ph-lightning text-lg"></i>
+
+                <span>Deconstruir Video</span>
+
+              </button>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- Metrics Row -->
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <div class="glass-card rounded-2xl p-5 border-amber-500/20">
+
+              <div class="flex items-center justify-between text-gray-400 text-xs font-semibold">
+
+                <span>Vistas Analizadas</span>
+
+                <i class="ph-bold ph-eye text-base text-amber-400"></i>
+
+              </div>
+
+              <div class="mt-2 text-2xl font-black text-white font-mono" id="valViews">138,000</div>
+
+              <p class="text-[11px] text-gray-400 mt-1">Extraído en tiempo real</p>
+
+            </div>
+
+
+
+            <div class="glass-card rounded-2xl p-5 border-emerald-500/20">
+
+              <div class="flex items-center justify-between text-gray-400 text-xs font-semibold">
+
+                <span>Ganancia Estimada</span>
+
+                <i class="ph-bold ph-currency-dollar text-base text-emerald-400"></i>
+
+              </div>
+
+              <div class="mt-2 text-2xl font-black text-emerald-400 font-mono" id="valEarnings">$483.00</div>
+
+              <p class="text-[11px] text-emerald-400/80 mt-1" id="valRpm">RPM: $3.50 / 1K vistas</p>
+
+            </div>
+
+
+
+            <div class="glass-card rounded-2xl p-5 border-purple-500/20">
+
+              <div class="flex items-center justify-between text-gray-400 text-xs font-semibold">
+
+                <span>Nicho & Audiencia</span>
+
+                <i class="ph-bold ph-users-three text-base text-purple-400"></i>
+
+              </div>
+
+              <div class="mt-2 text-base font-bold text-purple-200 truncate" id="valNiche">Psicología Oscura</div>
+
+              <p class="text-[11px] text-gray-400 mt-1 truncate" id="valAudience">25-45 años • Alta retención</p>
+
+            </div>
+
+
+
+            <div class="glass-card rounded-2xl p-5 border-cyan-500/20">
+
+              <div class="flex items-center justify-between text-gray-400 text-xs font-semibold">
+
+                <span>Formato Recomendado</span>
+
+                <i class="ph-bold ph-device-mobile text-base text-cyan-400"></i>
+
+              </div>
+
+              <div class="mt-2 text-2xl font-black text-cyan-300" id="valFormat">Short (9:16)</div>
+
+              <p class="text-[11px] text-gray-400 mt-1">Vertical TikTok / Shorts</p>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Whisper Real Transcript Box -->
+
+          <div class="glass-card rounded-2xl p-6 border-cyan-500/30 space-y-4">
+
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+
+              <div class="flex items-center gap-2">
+
+                <i class="ph-bold ph-translate text-cyan-400 text-lg"></i>
+
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Transcripción Acústica Real Extraída por Whisper</h3>
+
+              </div>
+
+              <span class="text-xs px-2.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-bold border border-cyan-500/20" id="dnaLanguageBadge">
+
+                Idioma Detectado: Español
+
+              </span>
+
+            </div>
+
+
+
+            <div class="p-4 rounded-xl bg-black/60 border border-white/5 text-xs text-gray-300 font-mono leading-relaxed" id="dnaRawTranscript">
+
+              "El silencio no es debilidad. Es la mayor demostración de control emocional que existe. Cuando aprendes a no reaccionar ante las provocaciones, le quitas el arma a tu enemigo."
+
+            </div>
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs pt-2">
+
+              <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+
+                <span class="text-amber-400 font-bold block uppercase text-[10px]">Contexto & Psicología</span>
+
+                <p class="text-gray-300" id="dnaContexto">Filosofía estoica sobre el autocontrol y el valor estratégico de no reaccionar.</p>
+
+              </div>
+
+              <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+
+                <span class="text-cyan-400 font-bold block uppercase text-[10px]">Ritmo de Cortes & Pacing</span>
+
+                <p class="text-gray-300" id="dnaCortes">Cortes dinámicos cada 3.2 segundos. Cero pausas muertas para sostener la curva AVD.</p>
+
+              </div>
+
+              <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+
+                <span class="text-purple-400 font-bold block uppercase text-[10px]">Diseño Sonoro & Música</span>
+
+                <p class="text-gray-300" id="dnaSonido">Piano neoclásico a 65 BPM con violonchelo melancólico y voz barítono pausada.</p>
+
+              </div>
+
+              <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+
+                <span class="text-rose-400 font-bold block uppercase text-[10px]">Estilo Visual & Iluminación</span>
+
+                <p class="text-gray-300" id="dnaVisual">Film noir intimista con sombras suaves, estatua de mármol y viñeta oscura.</p>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="pt-2 flex justify-end">
+
+              <button onclick="switchMode('studio')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs flex items-center gap-2 transition-all">
+
+                <span>Pasar al Taller de Guiones con estos Datos</span>
+
+                <i class="ph-bold ph-arrow-right"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 3: TALLER DE GUIONES & CURVA DE RETENCIÓN AVD -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionStudio" class="space-y-8 hidden">
+
+          
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            
+
+            <!-- Editor de Guion (Columna Izquierda 2/3) -->
+
+            <div class="lg:col-span-2 space-y-6">
+
+              
+
+              <div class="glass-card rounded-2xl p-6 border-white/10 space-y-4">
+
+                <div class="flex items-center justify-between border-b border-white/5 pb-3">
+
+                  <div>
+
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+
+                      <i class="ph-bold ph-pencil-simple text-amber-400"></i> Editor del Guion Réplica Maestro
+
+                    </h3>
+
+                    <p class="text-xs text-gray-400 mt-0.5">Calibrado con la biblia de estilo y voz neuronal del canal</p>
+
+                  </div>
+
+                  <span id="activeSceneBadge" class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">
+
+                    Escena 1 de 10
+
+                  </span>
+
+                </div>
+
+
+
+                <div class="space-y-3">
+
+                  <div>
+
+                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Título del Video</label>
+
+                    <input type="text" id="scriptTitle" value="Tu Soledad No es Fracaso: El Poder de Estar Solo" class="w-full px-4 py-2.5 bg-black/50 border border-white/10 rounded-xl text-sm text-white font-bold focus:outline-none focus:border-amber-400" />
+
+                  </div>
+
+
+
+                  <div>
+
+                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1 flex items-center justify-between">
+
+                      <span>Cuerpo del Guion (Voz en Off)</span>
+
+                      <span class="text-[10px] text-gray-400 font-mono" id="scriptWordCount">0 palabras • ~0s</span>
+
+                    </label>
+
+                    <textarea id="scriptBody" rows="12" class="w-full p-4 bg-black/60 border border-white/10 rounded-xl text-sm text-gray-200 font-sans leading-relaxed focus:outline-none focus:border-amber-400 font-normal select-all">El mayor error que cometes al sentirte solo durante las festividades es creer que algo está roto en ti. La sociedad te vende la ilusión de que el ruido, las fiestas y las sonrisas forzadas son sinónimo de éxito. Pero los estoicos comprendían una verdad mucho más profunda: tu soledad no es un vacío que debes llenar con la aprobación ajena. Es el laboratorio donde se forja tu carácter inquebrantable. Cuando todos buscan escapar de su propia mente a través de la distracción, el observador aprende a sentarse con su silencio. Quien domina su propia soledad se vuelve invulnerable ante el rechazo.</textarea>
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- Live AVD Retention Curve Analytics -->
+
+                <div class="p-4 rounded-xl bg-black/80 border border-amber-500/30 space-y-3">
+
+                  <div class="flex items-center justify-between">
+
+                    <div class="flex items-center gap-2">
+
+                      <i class="ph-bold ph-chart-line-up text-amber-400"></i>
+
+                      <span class="text-xs font-bold text-white uppercase">Curva de Retención AVD en Vivo</span>
+
+                    </div>
+
+                    <span id="avdScoreBadge" class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold border border-emerald-500/30">
+
+                      Score AVD: 94/100 (Excelente)
+
+                    </span>
+
+                  </div>
+
+
+
+                  <!-- Visual Timeline Markers -->
+
+                  <div class="space-y-1">
+
+                    <div class="flex justify-between text-[10px] text-gray-400 font-mono">
+
+                      <span>0s (Hook)</span>
+
+                      <span>15s (Micro-Hook)</span>
+
+                      <span>35s (Clímax)</span>
+
+                      <span id="avdTotalDuration">~45s Final</span>
+
+                    </div>
+
+                    <div class="w-full h-3 bg-gray-800 rounded-full overflow-hidden flex">
+
+                      <div class="h-full bg-emerald-500 w-[35%]" title="0-15s: Retención Fuerte"></div>
+
+                      <div class="h-full bg-amber-500 w-[45%]" title="15-35s: Micro-Hook"></div>
+
+                      <div class="h-full bg-cyan-500 w-[20%]" title="35s+: Clímax y CTA"></div>
+
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="grid grid-cols-2 gap-3 text-xs pt-1">
+
+                    <div class="p-2.5 rounded-lg bg-white/5 border border-white/5">
+
+                      <span class="text-[10px] text-gray-400 block uppercase">Pacing & Velocidad</span>
+
+                      <span class="text-white font-bold font-mono" id="avdPacingText">2.6 palabras/segundo (Ritmo Óptimo)</span>
+
+                    </div>
+
+                    <div class="p-2.5 rounded-lg bg-white/5 border border-white/5">
+
+                      <span class="text-[10px] text-gray-400 block uppercase">Fuga de Retención</span>
+
+                      <span class="text-emerald-400 font-bold" id="avdLeakStatus">✓ Cero frases de fuga detectadas</span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+                <div class="pt-2 flex flex-col sm:flex-row gap-3">
+
+                  
+
+              <!-- Dual-Audio USA Controller -->
+
+              <div class="p-4 bg-emerald-950/20 rounded-2xl border border-emerald-500/30 space-y-3 my-4">
+
+                <div class="flex items-center justify-between">
+
+                  <div class="flex items-center gap-2.5">
+
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-sm">
+
+                      <i class="ph-bold ph-globe"></i>
+
+                    </div>
+
+                    <div>
+
+                      <h4 class="font-bold text-white text-xs flex items-center gap-1.5">
+
+                        Pista Multi-Idioma en Inglés (USA)
+
+                        <span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/30 text-emerald-200 font-mono font-bold">RPM 4X</span>
+
+                      </h4>
+
+                      <p class="text-[10px] text-gray-400">Genera pista secundaria en inglés (TTS Andrew) para el mismo video de YouTube.</p>
+
+                    </div>
+
+                  </div>
+
+                  <button id="btnSynthEnglish" onclick="synthesizeEnglishTrack()" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 font-bold text-xs flex items-center gap-1.5 transition-all">
+
+                    <i class="ph-bold ph-speaker-high"></i> Sintetizar Voz USA
+
+                  </button>
+
+                </div>
+
+                <div id="englishAudioPlayerRow" class="hidden pt-2 border-t border-emerald-500/20 flex items-center justify-between gap-3">
+
+                  <div class="flex items-center gap-2">
+
+                    <span class="text-[10px] font-mono text-emerald-300">Pista USA:</span>
+
+                    <audio id="playerEnglishAudio" controls class="h-7 max-w-xs"></audio>
+
+                  </div>
+
+                  <a id="downloadEnglishAudioLink" href="#" download="voz_ingles_us_48k.wav" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[10px] font-semibold flex items-center gap-1">
+
+                    <i class="ph-bold ph-download-simple"></i> Bajar WAV
+
+                  </a>
+
+                </div>
+
+              </div>
+
+
+
+<button id="btnProduceVideo" onclick="startRender()" class="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all">
+
+                    <i class="ph-bold ph-play-circle text-lg"></i>
+
+                    <span>Sintetizar Audio & Subtítulos (Master)</span>
+
+                  </button>
+
+                  <button onclick="exportProductionZip()" class="px-6 py-3.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs border border-emerald-500/40 flex items-center justify-center gap-2 transition-all">
+
+                    <i class="ph-bold ph-package text-base"></i>
+
+                    <span>Descargar Kit ZIP Completo</span>
+
+                  </button>
+
+                </div>
+
+
+
+              </div>
+
+
+
+            </div>
+
+
+
+            <!-- Prompts Google Flow & Reglas de Cámara (Columna Derecha 1/3) -->
+
+            <div class="space-y-6">
+
+              
+
+              <div class="glass-card rounded-2xl p-6 border-white/10 space-y-4">
+
+                <div class="flex items-center justify-between border-b border-white/5 pb-3">
+
+                  <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+
+                    <i class="ph-bold ph-camera text-base"></i> Google Flow Storyboard (10 Escenas)
+
+                  </h4>
+
+                  <button onclick="copyAllFlowPrompts()" id="btnCopyAllFlow" class="text-[11px] text-cyan-300 hover:text-white flex items-center gap-1 font-mono">
+
+                    <i class="ph-bold ph-copy"></i> Copiar Todo
+
+                  </button>
+
+                </div>
+
+
+
+                <div class="space-y-2">
+
+                  <span class="text-[10px] text-gray-400 font-semibold uppercase">Directiva Permanente de Marca:</span>
+
+                  <div class="p-3 bg-black/60 rounded-xl border border-white/10 text-xs text-cyan-200/90 font-mono select-all leading-tight">
+
+                    ancient Roman stoic stone bust @LaMente, chiaroscuro film noir lighting, volumetric mist, vertical rain streaks, antique gold and cyan rim lights, slow continuous push-in zoom, zero camera shake
+
+                  </div>
+
+                </div>
+
+
+
+                <div class="space-y-2 pt-2">
+
+                  <span class="text-[10px] text-gray-400 font-semibold uppercase">Escenas Cinemáticas Extraídas:</span>
+
+                  <div class="space-y-2 max-h-[360px] overflow-y-auto pr-1" id="flowScenesList">
+
+                    <div class="p-3 bg-black/40 rounded-xl border border-white/5 text-xs text-gray-300 space-y-1">
+
+                      <div class="flex justify-between font-bold text-amber-300 text-[11px]">
+
+                        <span>Escena 1 (0:00 - 0:04)</span>
+
+                        <span class="font-mono text-gray-400">Micro-Hook</span>
+
+                      </div>
+
+                      <p class="text-[11px] font-mono text-gray-300">Close-up on weathered marble bust in heavy rain, gold rim light hitting eye socket, darkness on left, 8k cinematic.</p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 4: CTR LAB & MINIATURAS A/B (SIMULADOR SMARTPHONE REAL) -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionCtrLab" class="space-y-8 hidden">
+
+          
+
+          <div class="max-w-4xl mx-auto space-y-6">
+
+            
+
+            <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-amber-500/30">
+
+              <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+
+                <div>
+
+                  <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+
+                    <i class="ph-bold ph-image-square text-base"></i> CTR Lab & Previsualizador Móvil
+
+                  </div>
+
+                  <h2 class="text-2xl font-extrabold text-white mt-1">
+
+                    Pruebas A/B de Miniaturas & Safe Zones de YouTube
+
+                  </h2>
+
+                  <p class="text-xs text-gray-400 mt-0.5">
+
+                    Genera 3 variantes de alto impacto psicológico simultáneamente y pruébalas en un feed móvil realista.
+
+                  </p>
+
+                </div>
+
+
+
+                <!-- Aspect Selector -->
+
+                <div class="flex bg-black/60 p-1.5 rounded-xl border border-white/10 text-xs">
+
+                  <button id="btnAspect916" onclick="setThumbAspect('9:16')" class="px-3 py-1 rounded-lg font-bold text-gray-400 hover:text-white transition-all">9:16 Shorts</button>
+
+                  <button id="btnAspect169" onclick="setThumbAspect('16:9')" class="px-3 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all">16:9 YouTube</button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- Controls -->
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+
+                <div>
+
+                  <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Texto Hook de la Portada</label>
+
+                  <input type="text" id="thumbHookText" value="EL PODER DEL SILENCIO" class="w-full px-4 py-2.5 bg-black/50 border border-white/10 rounded-xl text-sm text-white font-bold focus:outline-none focus:border-amber-400" />
+
+                </div>
+
+                <div>
+
+                  <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Palabra Resaltada en Color</label>
+
+                  <input type="text" id="thumbHighlightWord" value="SILENCIO" class="w-full px-4 py-2.5 bg-black/50 border border-white/10 rounded-xl text-sm text-amber-300 font-bold focus:outline-none focus:border-amber-400" />
+
+                </div>
+
+              </div>
+
+
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
+
+                <button onclick="generateAbThumbnails()" id="btnGenerateAbThumb" class="py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all">
+
+                  <i class="ph-bold ph-lightning text-base"></i>
+
+                  <span>Generar 3 Variantes A/B</span>
+
+                </button>
+
+                <button onclick="generateCustomThumbnail()" id="btnGenerateThumb" class="py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs border border-white/10 flex items-center justify-center gap-2 transition-all">
+
+                  <i class="ph-bold ph-sparkle text-base"></i>
+
+                  <span>Portada Simple (1 Sola)</span>
+
+                </button>
+
+              </div>
+
+
+
+              <!-- Interactive A/B Container -->
+
+              <div id="thumbAbContainer" class="space-y-6 pt-6 border-t border-white/10 mt-6 hidden">
+
+                
+
+                <div class="flex items-center justify-between">
+
+                  <span class="text-xs text-gray-400 uppercase font-bold">Variantes Generadas para A/B Testing:</span>
+
+                  <button onclick="toggleSafeZoneOverlay()" id="btnToggleSafeZone" class="text-cyan-300 hover:text-white flex items-center gap-1.5 text-xs font-mono">
+
+                    <i class="ph-bold ph-shield-check"></i> <span id="safeZoneStatusText">Zonas Seguras: ON</span>
+
+                  </button>
+
+                </div>
+
+
+
+                <!-- Tabs -->
+
+                <div id="abVariantTabs" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+
+
+
+                <!-- SMARTPHONE SIMULATOR FRAME -->
+
+                <div class="max-w-lg mx-auto p-4 bg-gradient-to-b from-gray-900 to-black rounded-3xl border-2 border-white/15 shadow-2xl space-y-3">
+
+                  <div class="flex items-center justify-between text-[10px] text-gray-500 font-mono pb-1 border-b border-white/5">
+
+                    <span class="flex items-center gap-1"><i class="ph-bold ph-device-mobile"></i> Previsualización Feed Móvil</span>
+
+                    <span>YouTube App iOS/Android</span>
+
+                  </div>
+
+
+
+                  <!-- Mockup Screen -->
+
+                  <div class="relative rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner">
+
+                    <img id="thumbPreviewImg" src="" alt="Thumbnail Generado" class="w-full h-auto object-cover block" />
+
+                    
+
+                    <!-- YouTube Duration Pill -->
+
+                    <div class="absolute bottom-2 right-2 bg-black/85 text-white font-mono font-bold text-[11px] px-1.5 py-0.5 rounded tracking-tight z-10 border border-white/10">
+
+                      14:28
+
+                    </div>
+
+
+
+                    <!-- Safe Zones Overlay -->
+
+                    <div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex">
+
+                      <!-- Left 50%: Safe text area -->
+
+                      <div class="w-1/2 h-full border-2 border-dashed border-emerald-400/60 bg-emerald-500/10 p-2 flex flex-col justify-start">
+
+                        <span class="bg-black/80 text-emerald-300 text-[9px] font-bold px-1.5 py-0.5 rounded inline-block self-start border border-emerald-500/30">
+
+                          ✓ ÁREA SEGURA DE TEXTO
+
+                        </span>
+
+                      </div>
+
+                      <!-- Right 50%: Face clearance area -->
+
+                      <div class="w-1/2 h-full border-2 border-dashed border-cyan-400/40 p-2 flex flex-col justify-between items-end">
+
+                        <span class="bg-black/80 text-cyan-300 text-[9px] font-bold px-1.5 py-0.5 rounded border border-cyan-500/30">
+
+                          ÁREA VISUAL DE SUJETO
+
+                        </span>
+
+                        <!-- Danger corner -->
+
+                        <div class="border-2 border-red-500 bg-red-500/30 p-1 rounded text-right">
+
+                          <span class="text-red-300 text-[8px] font-extrabold block">⚠️ PELIGRO: TIMESTAMP</span>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+                  <!-- Feed Metadata -->
+
+                  <div class="flex gap-3 pt-1 items-start">
+
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-cyan-500 flex items-center justify-center font-black text-black text-sm shrink-0 mt-0.5" id="mockAvatar">
+
+                      M
+
+                    </div>
+
+                    <div class="space-y-0.5 flex-1 min-w-0">
+
+                      <h5 class="text-white text-xs font-semibold leading-snug line-clamp-2" id="mockVideoTitle">
+
+                        EL PODER DEL SILENCIO • La Mente Observadora
+
+                      </h5>
+
+                      <p class="text-[11px] text-gray-400" id="mockChannelMeta">La Mente Observadora • 148K vistas • hace 3 horas</p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- Actions -->
+
+                <div class="flex gap-3 pt-2">
+
+                  <a id="btnDownloadThumb" href="#" download="portada_viral.jpg" class="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-2 border border-white/10 transition-all text-center">
+
+                    <i class="ph-bold ph-download-simple"></i> Descargar JPG
+
+                  </a>
+
+                  <button onclick="copyToClipboard(this, document.getElementById('thumbFlowPromptText').innerText)" class="flex-1 py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-bold text-xs flex items-center justify-center gap-2 border border-cyan-500/20 transition-all">
+
+                    <i class="ph-bold ph-copy"></i> Copiar Prompt Google Flow
+
+                  </button>
+
+                </div>
+
+
+
+                <!-- Prompt Display -->
+
+                <div class="p-3 bg-black/50 rounded-xl border border-white/5 space-y-1">
+
+                  <div class="flex items-center justify-between">
+
+                    <span class="text-[10px] text-cyan-300 font-bold uppercase">Prompt Google Flow (Sujeto Limpio):</span>
+
+                    <span class="text-[10px] text-amber-400 font-mono" id="mockVariantCtr">CTR Estimado: 11.4%</span>
+
+                  </div>
+
+                  <p id="thumbFlowPromptText" class="text-xs text-gray-300 font-mono leading-relaxed select-all"></p>
+
+                </div>
+
+
+
+              </div>
+
+
+
+            </section>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 5: CLIPPER 9:16 REAL (CORTES FÍSICOS DE VIDEO MP4 CON FFMPEG) -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionRepurpose" class="space-y-8 hidden">
+
+          
+
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-cyan-500/30">
+
+            <div class="max-w-3xl space-y-2">
+
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+
+                <i class="ph-fill ph-scissors"></i> Opus Clipper 9:16 Real (Motor FFmpeg Local)
+
+              </div>
+
+              <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+
+                Recorta tus videos largos en <span class="text-cyan-400">Shorts Verticales 9:16 Reales</span>
+
+              </h2>
+
+              <p class="text-xs md:text-sm text-gray-400">
+
+                Pega el enlace de tu video de YouTube o sube un video. La plataforma extrae los picos de mayor impacto con Whisper, recorta físicamente los clips en MP4 vertical con desenfoque de fondo cinemático y te entrega los archivos descargables al instante.
+
+              </p>
+
+            </div>
+
+
+
+            <!-- CROP MODE SELECTOR -->
+
+            <div class="mt-4 flex flex-wrap items-center gap-3 bg-black/40 p-2.5 rounded-xl border border-white/10 text-xs">
+
+              <span class="text-gray-400 font-semibold flex items-center gap-1.5 pl-2">
+
+                <i class="ph-bold ph-camera"></i> Encuadre 9:16:
+
+              </span>
+
+              <div class="flex flex-wrap items-center gap-2">
+
+                <label class="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold transition-all" id="lblCropAuto">
+
+                  <input type="radio" name="cropModeRadio" value="auto" checked onchange="updateCropModeUi()" class="hidden" />
+
+                  <span>🤖 Detección Facial IA (Auto)</span>
+
+                </label>
+
+                <label class="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white border border-white/10 font-medium transition-all" id="lblCropSplit">
+
+                  <input type="radio" name="cropModeRadio" value="split" onchange="updateCropModeUi()" class="hidden" />
+
+                  <span>👥 Split-Screen (Podcast 2 Caras)</span>
+
+                </label>
+
+                <label class="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white border border-white/10 font-medium transition-all" id="lblCropFull">
+
+                  <input type="radio" name="cropModeRadio" value="full" onchange="updateCropModeUi()" class="hidden" />
+
+                  <span>🔲 Full Screen (1 Persona / Busto)</span>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="mt-4 flex flex-col md:flex-row gap-3">
+
+              <div class="relative flex-1">
+
+                <i class="ph-bold ph-video text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg"></i>
+
+                <input 
+
+                  type="text" 
+
+                  id="repurposeUrlInput"
+
+                  placeholder="Pega la URL de tu video largo de YouTube..." 
+
+                  value="https://www.youtube.com/watch?v=5xBON9PTLEw"
+
+                  class="w-full pl-12 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-all"
+
+                />
+
+              </div>
+
+              <button 
+
+                id="btnRepurpose"
+
+                onclick="processRepurpose()"
+
+                class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-extrabold text-sm shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 transition-all transform active:scale-95 whitespace-nowrap"
+
+              >
+
+                <i class="ph-bold ph-scissors text-lg"></i>
+
+                <span>Recortar y Generar Shorts MP4</span>
+
+              </button>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- Real Cut Clips Grid -->
+
+          <div id="repurposeResults" class="space-y-6 hidden">
+
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+
+                <i class="ph-bold ph-film-strip text-cyan-400"></i> Clips Recortados Listos para Descargar & Publicar
+
+              </h3>
+
+              <span class="text-xs text-gray-400 font-mono">Renderizados en 1080x1920 con Subtítulos .SRT</span>
+
+            </div>
+
+            <div id="clipsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 6: BRAINSTORMING DE TÍTULOS & SECUENCIAS -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionBrainstorm" class="space-y-8 hidden">
+
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-purple-500/20">
+
+            <div class="max-w-3xl space-y-2">
+
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-purple-400">
+
+                <i class="ph-bold ph-chats-circle"></i> Copiloto Creativo & Estratégico
+
+              </div>
+
+              <h2 class="text-2xl font-extrabold text-white tracking-tight">
+
+                Co-creación de Ideas, Ganchos y Guiones
+
+              </h2>
+
+              <p class="text-xs text-gray-400">
+
+                Chatea con el modelo afinado para estructurar ángulos contrarios y títulos irresistibles.
+
+              </p>
+
+            </div>
+
+
+
+            <div class="mt-6 space-y-4">
+
+              <div id="chatHistoryBox" class="p-4 bg-black/60 rounded-xl border border-white/10 min-h-[220px] max-h-[360px] overflow-y-auto space-y-3 text-xs">
+
+                <div class="text-gray-400 italic">Escribe un tema o nicho para comenzar a generar ideas virales...</div>
+
+              </div>
+
+              <div class="flex gap-2">
+
+                <input type="text" id="chatInput" placeholder="Ej: Hábitos silenciosos de personas millonarias..." class="flex-1 px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-purple-400" onkeydown="if(event.key==='Enter') sendChatMessage()" />
+
+                <button onclick="sendChatMessage()" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs flex items-center gap-2">
+
+                  <i class="ph-bold ph-paper-plane-right"></i> Enviar
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 7: INCUBADORA DE CANALES (BRAND HOLDING) -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionResearch" class="space-y-8 hidden">
+
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-emerald-500/20">
+
+            <div class="max-w-3xl space-y-2">
+
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-400">
+
+                <i class="ph-bold ph-compass"></i> Incubadora de Canales & Brand Holding
+
+              </div>
+
+              <h2 class="text-2xl font-extrabold text-white tracking-tight">
+
+                Crea y Administra tu Red de Canales Faceless
+
+              </h2>
+
+              <p class="text-xs text-gray-400">
+
+                Define arquetipos, tesis centrales, voces neuronales y reglas visuales independientes para cada canal.
+
+              </p>
+
+            </div>
+
+
+
+            <div class="mt-6 flex flex-col md:flex-row gap-3">
+
+              <div class="relative flex-1">
+
+                <i class="ph-bold ph-sparkle text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-lg"></i>
+
+                <input 
+
+                  type="text" 
+
+                  id="nicheTopicInput"
+
+                  placeholder="Ingresa un nuevo nicho ej: Finanzas Oscuras, Filosofía Samurai, Estoicismo Moderno..." 
+
+                  value="Finanzas Oscuras"
+
+                  class="w-full pl-12 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 transition-all"
+
+                />
+
+              </div>
+
+              <button 
+
+                onclick="conductResearch()"
+
+                id="btnResearch"
+
+                class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-black font-extrabold text-sm shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 transition-all"
+
+              >
+
+                <i class="ph-bold ph-compass text-lg"></i>
+
+                <span>Investigar Nicho & Crear Marca</span>
+
+              </button>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- Brand Bible Form Card -->
+
+          <div class="glass-card rounded-2xl p-6 border-white/10 space-y-4">
+
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+
+                <i class="ph-bold ph-book-bookmark text-emerald-400"></i> Biblia de Marca Activa
+
+              </h3>
+
+              <button onclick="saveCurrentBrandForm()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs flex items-center gap-1.5 transition-all">
+
+                <i class="ph-bold ph-floppy-disk"></i> Guardar Canal
+
+              </button>
+
+            </div>
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              <div>
+
+                <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Nombre del Canal</label>
+
+                <input type="text" id="brandFormName" value="La Mente Observadora" class="w-full px-3 py-2 bg-black/60 border border-white/10 rounded-lg text-xs text-white font-bold" />
+
+              </div>
+
+              <div>
+
+                <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Handle (@)</label>
+
+                <input type="text" id="brandFormHandle" value="@LaMenteObservadora" class="w-full px-3 py-2 bg-black/60 border border-white/10 rounded-lg text-xs text-gray-300 font-mono" />
+
+              </div>
+
+            </div>
+
+
+
+            <div>
+
+              <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Tesis Central / Filosofía</label>
+
+              <textarea id="brandFormThesis" rows="3" class="w-full p-3 bg-black/60 border border-white/10 rounded-lg text-xs text-gray-200 leading-relaxed font-normal">La verdadera fuerza no consiste en gritar o discutir, sino en observar sin reaccionar, sostener límites inquebrantables y dominar las leyes no escritas de la conducta humana.</textarea>
+
+            </div>
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              <div>
+
+                <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Voz Neuronal</label>
+
+                <input type="text" id="brandFormVoice" value="es-US-AlonsoNeural (Pitch: -4Hz, Rate: -7%)" class="w-full px-3 py-2 bg-black/60 border border-white/10 rounded-lg text-xs text-gray-200" />
+
+              </div>
+
+              <div>
+
+                <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Directiva Visual Google Flow</label>
+
+                <input type="text" id="brandFormFlow" value="ancient Roman stoic stone bust @LaMente, chiaroscuro film noir lighting, volumetric mist" class="w-full px-3 py-2 bg-black/60 border border-white/10 rounded-lg text-xs text-cyan-200/90 font-mono" />
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      
+
+        <!-- ========================================================================= -->
+
+        <!-- VIEW 8: TABLERO KANBAN DE EMBUDO TRANS-MEDIA (WORKFLOW) -->
+
+        <!-- ========================================================================= -->
+
+        <div id="sectionFunnel" class="space-y-6 hidden">
+
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 glass-card rounded-2xl border-emerald-500/30">
+
+            <div>
+
+              <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
+
+                Funnel Mastery
+
+              </span>
+
+              <h2 class="text-xl font-bold text-white mt-2">Tablero de Publicación y Embudo Viral</h2>
+
+              <p class="text-xs text-gray-400 mt-1">Estrategia 2 Videos Largos + 6 Shorts semanales con embudo activo hacia monetización.</p>
+
+            </div>
+
+            <button onclick="createNewFunnelCard()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-black font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-emerald-500/20 transition-all">
+
+              <i class="ph-bold ph-plus-circle text-base"></i> Añadir Proyecto al Embudo
+
+            </button>
+
+          </div>
+
+
+
+          <!-- KANBAN BOARD 4 COLUMNS -->
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <!-- Col 1 -->
+
+            <div class="glass-card rounded-2xl p-4 border-white/10 space-y-3">
+
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+
+                <div class="flex items-center gap-2">
+
+                  <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+
+                  <h3 class="font-bold text-white text-xs uppercase tracking-wide">1. Ideas de Radar</h3>
+
+                </div>
+
+                <span id="cntColIdea" class="text-[10px] font-mono text-gray-400 bg-white/5 px-2 py-0.5 rounded">0</span>
+
+              </div>
+
+              <div id="colIdea" class="space-y-3 min-h-[300px]"></div>
+
+            </div>
+
+
+
+            <!-- Col 2 -->
+
+            <div class="glass-card rounded-2xl p-4 border-white/10 space-y-3">
+
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+
+                <div class="flex items-center gap-2">
+
+                  <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+
+                  <h3 class="font-bold text-white text-xs uppercase tracking-wide">2. Guion & AVD</h3>
+
+                </div>
+
+                <span id="cntColScript" class="text-[10px] font-mono text-gray-400 bg-white/5 px-2 py-0.5 rounded">0</span>
+
+              </div>
+
+              <div id="colScript" class="space-y-3 min-h-[300px]"></div>
+
+            </div>
+
+
+
+            <!-- Col 3 -->
+
+            <div class="glass-card rounded-2xl p-4 border-white/10 space-y-3">
+
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+
+                <div class="flex items-center gap-2">
+
+                  <div class="w-2.5 h-2.5 rounded-full bg-cyan-500"></div>
+
+                  <h3 class="font-bold text-white text-xs uppercase tracking-wide">3. Google Flow & Voz</h3>
+
+                </div>
+
+                <span id="cntColProduction" class="text-[10px] font-mono text-gray-400 bg-white/5 px-2 py-0.5 rounded">0</span>
+
+              </div>
+
+              <div id="colProduction" class="space-y-3 min-h-[300px]"></div>
+
+            </div>
+
+
+
+            <!-- Col 4 -->
+
+            <div class="glass-card rounded-2xl p-4 border-emerald-500/20 bg-emerald-950/5 space-y-3">
+
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+
+                <div class="flex items-center gap-2">
+
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+
+                  <h3 class="font-bold text-emerald-300 text-xs uppercase tracking-wide">4. Embudo Activo</h3>
+
+                </div>
+
+                <span id="cntColPublished" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">0</span>
+
+              </div>
+
+              <div id="colPublished" class="space-y-3 min-h-[300px]"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+      
+        <!-- VIEW 9: AI MAGIC VFX & PROMPT EDITOR (EDICION POR PALABRAS) -->
+        <div id="sectionVfx" class="space-y-8 hidden">
+          <section class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden border-fuchsia-500/30">
+            <div class="max-w-4xl space-y-3">
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fuchsia-400">
+                <i class="ph-bold ph-magic-wand text-sm"></i> Motor VFX Inteligente Guiado por Lenguaje Natural
+              </div>
+              <h2 class="text-3xl font-extrabold text-white tracking-tight">
+                Editor de Video por Palabras & Motion Graphics
+              </h2>
+              <p class="text-sm text-gray-300 leading-relaxed">
+                Aplica efectos especiales estilo Claude Code / Remotion, cinética de texto tipo Hormozi, punch zoom dinámico, 
+                color grading cinematográfico y sustitución de objetos / ropa con IA sin tocar una línea de código.
+              </p>
+            </div>
+
+            <!-- Quick Preset Pills -->
+            <div class="mt-6 flex flex-wrap gap-2.5">
+              <span class="text-xs text-gray-400 self-center mr-1">Presets rápidos:</span>
+              <button onclick="applyVfxPreset('film_noir_punch')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-fuchsia-500/20 text-gray-300 hover:text-fuchsia-300 border border-white/10 hover:border-fuchsia-500/40 transition-all">
+                🎬 Film Noir + Zoom
+              </button>
+              <button onclick="applyVfxPreset('cyberpunk_neon')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-cyan-500/20 text-gray-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-500/40 transition-all">
+                ⚡ Cyberpunk + Barra
+              </button>
+              <button onclick="applyVfxPreset('podcast_pro')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-amber-500/20 text-gray-300 hover:text-amber-300 border border-white/10 hover:border-amber-500/40 transition-all">
+                🎙️ Podcast Pro + Mic
+              </button>
+              <button onclick="applyVfxPreset('change_clothes')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-purple-500/20 text-gray-300 hover:text-purple-300 border border-white/10 hover:border-purple-500/40 transition-all">
+                👔 Cambiar Ropa (Traje)
+              </button>
+              <button onclick="applyVfxPreset('kinetic_viral')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-emerald-500/20 text-gray-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/40 transition-all">
+                🔥 Hormozi + Grano VHS
+              </button>
+            </div>
+
+            <!-- Prompt & Control Box -->
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div class="lg:col-span-2 space-y-4">
+                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">
+                  Instrucción en Lenguaje Natural (Prompt de Edición)
+                </label>
+                <div class="relative">
+                  <textarea id="vfxPromptInput" rows="4" class="w-full bg-slate-900/80 border border-white/10 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-fuchsia-500 transition-all" placeholder="Ejemplo: Pon subtítulos estilo Hormozi en dorado, haz zoom punch dinámico en palabras de impacto, aplica atmósfera Film Noir de alto contraste y agrega un lower third que diga 'Howard Director'..."></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                  <div class="flex items-center gap-3">
+                    <label class="text-xs text-gray-400">Formato:</label>
+                    <select id="vfxAspectSelect" class="bg-slate-800 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-fuchsia-500">
+                      <option value="keep">Mantener Original</option>
+                      <option value="9:16">Vertical 9:16 (Shorts/TikTok/Reels)</option>
+                      <option value="16:9">Horizontal 16:9 (YouTube Estándar)</option>
+                    </select>
+                  </div>
+
+                  <button id="btnRenderVfx" onclick="triggerVfxRender()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 hover:from-fuchsia-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-fuchsia-500/25 flex items-center gap-2 transition-all">
+                    <i class="ph-bold ph-sparkle text-base"></i> Renderizar con Palabras
+                  </button>
+                </div>
+              </div>
+
+              <!-- Video Source Selector & Status -->
+              <div class="bg-slate-900/60 border border-white/10 rounded-xl p-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                  <span class="text-xs font-bold text-gray-300 uppercase tracking-wider block">Fuente de Video</span>
+                  <div class="space-y-2">
+                    <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+                      <input type="radio" name="vfxSourceRadio" value="default" checked class="accent-fuchsia-500">
+                      <span>Video Activo de la Suite / Muestra HD</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+                      <input type="radio" name="vfxSourceRadio" value="repurposed" class="accent-fuchsia-500">
+                      <span>Último Clip Recortado (Clipper 9:16)</span>
+                    </label>
+                  </div>
+                  <div class="pt-2 border-t border-white/10">
+                    <span class="text-[11px] text-gray-400 block mb-1">Motor IA Generativo:</span>
+                    <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Kling AI + FFmpeg Engine Listo
+                    </span>
+                  </div>
+                </div>
+
+                <div id="vfxExecutionBadge" class="mt-4 p-2.5 rounded-lg bg-white/5 border border-white/5 text-[11px] text-gray-400">
+                  Listo para interpretar tu orden.
+                </div>
+              </div>
+            </div>
+
+            <!-- Workspace: Player & Logs -->
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              <!-- Result Video Player -->
+              <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <i class="ph-bold ph-video text-fuchsia-400"></i> Resultado Renderizado
+                  </span>
+                  <span id="vfxResultMeta" class="text-[11px] font-mono text-gray-400">Sin procesar</span>
+                </div>
+
+                <div class="aspect-video bg-black rounded-xl overflow-hidden flex items-center justify-center border border-white/5 relative">
+                  <video id="vfxVideoPlayer" controls class="w-full h-full object-contain hidden"></video>
+                  <div id="vfxVideoPlaceholder" class="text-center p-6 text-gray-500">
+                    <i class="ph-bold ph-film-slate text-4xl mb-2 opacity-50 block"></i>
+                    <p class="text-xs">El video editado aparecerá aquí tras presionar 'Renderizar con Palabras'</p>
+                  </div>
+                </div>
+
+                <div id="vfxActionButtons" class="flex gap-3 hidden">
+                  <a id="vfxDownloadLink" href="#" download class="flex-1 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs text-center transition-all flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-download-simple"></i> Descargar MP4
+                  </a>
+                  <button onclick="sendVfxToFunnel()" class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-kanban"></i> Enviar a Embudo
+                  </button>
+                </div>
+              </div>
+
+              <!-- Terminal & Applied Recipe -->
+              <div class="bg-slate-950 border border-white/10 rounded-2xl p-5 font-mono text-xs space-y-4">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                  <span class="text-fuchsia-400 font-bold flex items-center gap-2">
+                    <i class="ph-bold ph-terminal-window"></i> Traza de Ejecución IA
+                  </span>
+                  <span class="text-[10px] text-gray-500">Harness² Active Node</span>
+                </div>
+
+                <div id="vfxLogsContainer" class="space-y-1.5 text-gray-400 text-[11px] max-h-[300px] overflow-y-auto leading-relaxed">
+                  <div class="text-gray-600">> Sistema iniciado. Esperando prompt...</div>
+                </div>
+
+                <div id="vfxRecipeContainer" class="pt-3 border-t border-white/10 hidden">
+                  <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Receta Estructurada Aplicada:</span>
+                  <pre id="vfxRecipeJson" class="text-[10px] text-emerald-400 bg-black/50 p-2.5 rounded-lg overflow-x-auto"></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+</main>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- JAVASCRIPT LOGIC ENGINE -->
+
+  <script>
+
+
+
+
+
+    let currentReplicaScriptEn = '';
+
+
+
+    function escHtml(str) {
+
+      if (!str) return '';
+
+      return String(str)
+
+        .replace(/&/g, '&amp;')
+
+        .replace(/</g, '&lt;')
+
+        .replace(/>/g, '&gt;')
+
+        .replace(/"/g, '&quot;')
+
+        .replace(/'/g, '&#039;');
+
+    }
+
+
+
+    async function loadFunnelBoard() {
+
+      try {
+
+        const res = await fetch('/api/funnel/projects');
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+
+          renderFunnelBoard(data.projects);
+
+        }
+
+      } catch (err) {
+
+        console.error('Error loading funnel board:', err);
+
+      }
+
+    }
+
+
+
+    function renderFunnelBoard(projects) {
+
+      const colMap = {
+
+        idea: document.getElementById('colIdea'),
+
+        script: document.getElementById('colScript'),
+
+        production: document.getElementById('colProduction'),
+
+        published: document.getElementById('colPublished')
+
+      };
+
+
+
+      const countMap = {
+
+        idea: document.getElementById('cntColIdea'),
+
+        script: document.getElementById('cntColScript'),
+
+        production: document.getElementById('cntColProduction'),
+
+        published: document.getElementById('cntColPublished')
+
+      };
+
+
+
+      Object.values(colMap).forEach(col => { if (col) col.innerHTML = ''; });
+
+      const counts = { idea: 0, script: 0, production: 0, published: 0 };
+
+
+
+      projects.forEach(p => {
+
+        const status = p.status || 'idea';
+
+        if (counts[status] !== undefined) counts[status]++;
+
+        const container = colMap[status];
+
+        if (!container) return;
+
+
+
+        const card = document.createElement('div');
+
+        card.className = 'glass-card p-3.5 rounded-xl border border-white/10 space-y-2 hover:border-amber-500/40 transition-all';
+
+        
+
+        let moveBtn = '';
+
+        if (status === 'idea') {
+
+          moveBtn = `<button onclick="moveFunnelCard('${p.id}', 'script')" class="text-[10px] px-2 py-1 bg-amber-500/20 text-amber-300 rounded hover:bg-amber-500/30 font-semibold flex items-center gap-1">A Guion <i class="ph-bold ph-arrow-right"></i></button>`;
+
+        } else if (status === 'script') {
+
+          moveBtn = `<button onclick="moveFunnelCard('${p.id}', 'production')" class="text-[10px] px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/30 font-semibold flex items-center gap-1">A Producción <i class="ph-bold ph-arrow-right"></i></button>`;
+
+        } else if (status === 'production') {
+
+          moveBtn = `<button onclick="moveFunnelCard('${p.id}', 'published')" class="text-[10px] px-2 py-1 bg-emerald-500/20 text-emerald-300 rounded hover:bg-emerald-500/30 font-semibold flex items-center gap-1">Publicar <i class="ph-bold ph-check"></i></button>`;
+
+        }
+
+
+
+        card.innerHTML = `
+
+          <div class="flex items-start justify-between gap-2">
+
+            <h4 class="font-bold text-white text-xs leading-snug">${escHtml(p.title)}</h4>
+
+          </div>
+
+          ${p.notes ? `<p class="text-[10px] text-gray-400 line-clamp-2">${escHtml(p.notes)}</p>` : ''}
+
+          <div class="flex items-center justify-between pt-2 border-t border-white/5">
+
+            <span class="text-[9px] text-gray-500 font-mono">${p.created_at || 'Hoy'}</span>
+
+            ${moveBtn}
+
+          </div>
+
+        `;
+
+        container.appendChild(card);
+
+      });
+
+
+
+      Object.keys(counts).forEach(k => {
+
+        if (countMap[k]) countMap[k].innerText = counts[k];
+
+      });
+
+    }
+
+
+
+    async function moveFunnelCard(id, newStatus) {
+
+      try {
+
+        const res = await fetch('/api/funnel/projects/move', {
+
+          method: 'POST',
+
+          headers: { 'Content-Type': 'application/json' },
+
+          body: JSON.stringify({ id: id, status: newStatus })
+
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+
+          renderFunnelBoard(data.projects);
+
+        }
+
+      } catch (err) {
+
+        console.error('Error moving card:', err);
+
+      }
+
+    }
+
+
+
+    async function createNewFunnelCard() {
+
+      const title = prompt('Título o idea del video para el embudo:');
+
+      if (!title || !title.trim()) return;
+
+      try {
+
+        const res = await fetch('/api/funnel/projects', {
+
+          method: 'POST',
+
+          headers: { 'Content-Type': 'application/json' },
+
+          body: JSON.stringify({
+
+            title: title.trim(),
+
+            status: 'idea',
+
+            notes: 'Capturado en sesión de trabajo',
+
+            brand_id: activeBrandId
+
+          })
+
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+
+          loadFunnelBoard();
+
+        }
+
+      } catch (err) {
+
+        console.error('Error creating funnel card:', err);
+
+      }
+
+    }
+
+
+
+    async function synthesizeEnglishTrack() {
+
+      const scriptEn = (currentReplicaScriptEn || document.getElementById('scriptBody').value || '').trim();
+
+      if (!scriptEn) {
+
+        alert('Primero analiza un video o escribe un guión para generar el audio en inglés.');
+
+        return;
+
+      }
+
+
+
+      const btn = document.getElementById('btnSynthEnglish');
+
+      const orig = btn ? btn.innerHTML : '';
+
+      if (btn) {
+
+        btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin text-sm"></i> Sintetizando...';
+
+        btn.disabled = true;
+
+      }
+
+
+
+      try {
+
+        const res = await fetch('/api/voice/synthesize', {
+
+          method: 'POST',
+
+          headers: { 'Content-Type': 'application/json' },
+
+          body: JSON.stringify({
+
+            script_text: scriptEn,
+
+            voice_name: 'en-US-AndrewNeural',
+
+            language: 'en'
+
+          })
+
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success' && data.audio_url) {
+
+          const row = document.getElementById('englishAudioPlayerRow');
+
+          const player = document.getElementById('playerEnglishAudio');
+
+          const link = document.getElementById('downloadEnglishAudioLink');
+
+          if (row && player) {
+
+            player.src = data.audio_url;
+
+            if (link) link.href = data.audio_url;
+
+            row.classList.remove('hidden');
+
+            player.play();
+
+          }
+
+        } else {
+
+          alert('No se pudo sintetizar la pista en inglés.');
+
+        }
+
+      } catch (err) {
+
+        console.error('Error sintetizando inglés:', err);
+
+        alert('Error de conexión al sintetizar la pista.');
+
+      } finally {
+
+        if (btn) {
+
+          btn.innerHTML = orig;
+
+          btn.disabled = false;
+
+        }
+
+      }
+
+    }
+
+  </script>
+
+  <script src="/static/app.js"></script>
+
+
+
+</body>
+
+</html>
+

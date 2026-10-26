@@ -1,0 +1,44 @@
+# Entorno virtual y dependencias de Python
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.env.*
+
+# Videos y archivos pesados generados localmente (800MB+)
+static/output/*
+!static/output/.gitkeep
+output/*
+!output/.gitkeep
+
+# Archivos temporales y de pruebas
+*.mp4
+*.wav
+*.mp3
+*.srt
+*.log
+ddg_sample.html
+yt_scraped.html
+patch_*.py
+fix_*.py
+test_*.py
+find_views*.py
+scrape_test*.py
+check_*.py
+update_*.py
+validate_*.py
+wire_everything.py
+inject_perfect_buttons.py
+inspect_missing_usages.py
+append_ab_engine.py
+apply_master_perfection.py
+build_saas_dashboard.py
+
+# Sistema operativo e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

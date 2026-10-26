@@ -1,0 +1,146 @@
+{
+  "@CaminoImplacable": {
+    "handle": "@CaminoImplacable",
+    "channel_title": "Camino Implacable",
+    "channel_url": "https://www.youtube.com/@CaminoImplacable/videos",
+    "niche": "Psicología Oscura & Manipulación",
+    "baseline_views": 85000,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "FrnvSaw9qSY",
+        "title": "☣⛔ DARK PSYCHOLOGY | Las 10 TÉCNICAS de Obsesión Psicológica",
+        "url": "https://www.youtube.com/watch?v=FrnvSaw9qSY",
+        "view_count": 2503300,
+        "duration": "14:20",
+        "published": "Viral",
+        "thumbnail": "https://i.ytimg.com/vi/FrnvSaw9qSY/hqdefault.jpg",
+        "outlier_ratio": 29.45,
+        "is_outlier": true,
+        "velocity_label": "🔥 29.5x Anomalía Viral"
+      },
+      {
+        "id": "LBHirMUd6kM",
+        "title": "DARK PSYCHOLOGY | Las 5 Técnicas Más Efectivas de Manipulación",
+        "url": "https://www.youtube.com/watch?v=LBHirMUd6kM",
+        "view_count": 465200,
+        "duration": "11:15",
+        "published": "Viral",
+        "thumbnail": "https://i.ytimg.com/vi/LBHirMUd6kM/hqdefault.jpg",
+        "outlier_ratio": 5.47,
+        "is_outlier": true,
+        "velocity_label": "🔥 5.5x Anomalía Viral"
+      }
+    ]
+  },
+  "@MundoEstoico": {
+    "handle": "@MundoEstoico",
+    "channel_title": "Mundo Estoico",
+    "channel_url": "https://www.youtube.com/@MundoEstoico/videos",
+    "niche": "Filosofía Estoica & Autocontrol",
+    "baseline_views": 45000,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "5xBON9PTLEw",
+        "title": "La CLAVE para que NADA ni NADIE vuelva a MOLESTARTE (Marco Aurelio)",
+        "url": "https://www.youtube.com/watch?v=5xBON9PTLEw",
+        "view_count": 908900,
+        "duration": "16:40",
+        "published": "Viral",
+        "thumbnail": "https://i.ytimg.com/vi/5xBON9PTLEw/hqdefault.jpg",
+        "outlier_ratio": 20.2,
+        "is_outlier": true,
+        "velocity_label": "🔥 20.2x Anomalía Viral"
+      }
+    ]
+  },
+  "@Inviertenti": {
+    "handle": "@Inviertenti",
+    "channel_title": "Invierte En Ti",
+    "channel_url": "https://www.youtube.com/@Inviertenti/videos",
+    "niche": "Desarrollo Personal & Mentalidad",
+    "baseline_views": 42000,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "XDnq3BJ6ug4",
+        "title": "El Arte de Pasar Desapercibido: Por Qué los Más Inteligentes Callan",
+        "url": "https://www.youtube.com/watch?v=XDnq3BJ6ug4",
+        "view_count": 189000,
+        "duration": "12:45",
+        "published": "Viral",
+        "thumbnail": "https://i.ytimg.com/vi/XDnq3BJ6ug4/hqdefault.jpg",
+        "outlier_ratio": 4.5,
+        "is_outlier": true,
+        "velocity_label": "🔥 4.5x Anomalía Viral"
+      }
+    ]
+  },
+  "@MaquiaveloEnLaPráctica": {
+    "handle": "@MaquiaveloEnLaPráctica",
+    "channel_title": "Maquiavelo En La Práctica",
+    "channel_url": "https://www.youtube.com/results?search_query=Maquiavelo+En+La+Práctica",
+    "niche": "Nicho en Tendencia",
+    "baseline_views": 473844,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "K__9MeiHWPs",
+        "title": "Las 48 LEYES del PODER, la MANIPULACIÓN Oscura de Maquiavelo y de los Grandes Líderes - DETALLADO",
+        "url": "https://www.youtube.com/watch?v=K__9MeiHWPs",
+        "view_count": 375224,
+        "duration": "105:01",
+        "published": "Tendencia",
+        "thumbnail": "https://i.ytimg.com/vi/K__9MeiHWPs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDcT7kHxnMD_xUaoi3o6FwWS1_QDw",
+        "outlier_ratio": 0.79,
+        "is_outlier": false,
+        "velocity_label": "0.79x Baseline"
+      }
+    ]
+  },
+  "@UNPOCOMEJOR": {
+    "handle": "@UNPOCOMEJOR",
+    "channel_title": "UN POCO MEJOR",
+    "channel_url": "https://www.youtube.com/results?search_query=UN+POCO+MEJOR",
+    "niche": "Nicho en Tendencia",
+    "baseline_views": 473844,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "jNfzi2RReI4",
+        "title": "48 Psychological Laws of Power - Robert Greene (full summary)",
+        "url": "https://www.youtube.com/watch?v=jNfzi2RReI4",
+        "view_count": 920663,
+        "duration": "20:12",
+        "published": "Tendencia",
+        "thumbnail": "https://i.ytimg.com/vi/jNfzi2RReI4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCNePk8weVY5A27sUCjgp0tOEZr2A",
+        "outlier_ratio": 1.94,
+        "is_outlier": true,
+        "velocity_label": "🔥 1.94x Viral"
+      }
+    ]
+  },
+  "@AlquimiaPsíquica-Maestr": {
+    "handle": "@AlquimiaPsíquica-Maestr",
+    "channel_title": "Alquimia Psíquica - Maestros de la Sabiduría",
+    "channel_url": "https://www.youtube.com/results?search_query=Alquimia+Psíquica+-+Maestros+de+la+Sabiduría",
+    "niche": "Nicho en Tendencia",
+    "baseline_views": 473844,
+    "last_scanned": "En Vivo",
+    "videos": [
+      {
+        "id": "yByI5qv30Sw",
+        "title": "10 lecciones de MAQUIAVELO sobre el PODER, el ÉXITO y el RESPETO",
+        "url": "https://www.youtube.com/watch?v=yByI5qv30Sw",
+        "view_count": 909491,
+        "duration": "40:31",
+        "published": "Tendencia",
+        "thumbnail": "https://i.ytimg.com/vi/yByI5qv30Sw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC50IVSabd1OiB9WPz1qkqnuoAX0g",
+        "outlier_ratio": 1.92,
+        "is_outlier": true,
+        "velocity_label": "🔥 1.92x Viral"
+      }
+    ]
+  }
+}
